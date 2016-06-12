@@ -10,26 +10,14 @@ import {
 	Drawer,
 	MenuItem,
 	IconButton,
-	Divider,
-	CircularProgress
+	Divider
 } from 'material-ui';
 import { connect } from 'react-redux';
 
 import css from './App.css';
 import Overview from './pages/Overview';
-import { action_app_getUserInfo } from '../actions/app';
+import Todo from './pages/Todo';
 import { getColorForCost, formatNumber } from '../utils/helper';
-
-export class Todo extends Component {
-	render(){
-		return(
-			<div>
-				Todo
-				<CircularProgress size={2}/>
-			</div>
-		);
-	}
-}
 
 const pages = {
 	1: Todo,
@@ -48,11 +36,6 @@ export class App extends Component {
 			totalCostThisMonth: PropTypes.number,
 			monthlyIncome: PropTypes.number
 		}),
-		// userName: PropTypes.string,
-		// userID: PropTypes.number,
-		// isAdmin: PropTypes.bool,
-		// totalCostThisMonth: PropTypes.number,
-		// monthlyIncome: PropTypes.number,
 		dispatch: PropTypes.func.isRequired
 	}
 	constructor(props) {
@@ -60,11 +43,11 @@ export class App extends Component {
 
 		this.state = {
 			drawerOpen: false,
-			activePageId: 2
+			activePageId: 1
 		};
 
-		this.openDrawer = this.openDrawer.bind(this);
-		this.onDrawerRequestChange = this.onDrawerRequestChange.bind(this);
+		this.openDrawer = ::this.openDrawer;
+		this.onDrawerRequestChange = ::this.onDrawerRequestChange;
 		this.getActivePage = ::this.getActivePage;
 	}
 
@@ -81,7 +64,10 @@ export class App extends Component {
 	}
 
 	setActivePage(pageId){
-		this.setState({activePageId: pageId});
+		this.setState({
+			activePageId: pageId,
+			drawerOpen: false
+		});
 	}
 
 	getActivePage(){
@@ -92,27 +78,23 @@ export class App extends Component {
 	}
 	render() {
 		const {
-			dispatch,
-			userInfo
-		} = this.props;
+			userName,
+			isAdmin,
+			totalCostThisMonth,
+			monthlyIncome
+		} = this.props.userInfo;
+		const color = getColorForCost(totalCostThisMonth, monthlyIncome);
 
-		if(!userInfo){
-			dispatch(action_app_getUserInfo());
-			return null;
-		}
-
-
-
-		const totalConstStyle = {};
-		totalConstStyle.color = getColorForCost(userInfo.totalCostThisMonth, userInfo.monthlyIncome);
-
+		const totalConstStyle = { color: color.textColor };
+		const appBarStyle = { background: color.color };
 
 		const ActivePage = this.getActivePage();
 
 		return (
 			<div>
 				<AppBar
-					title={userInfo.userName}
+					title={userName}
+					style={appBarStyle}
 					onLeftIconButtonTouchTap={this.openDrawer}
 					iconElementRight={<IconButton><ActionPowerSettingsNew/></IconButton>}
 					>
@@ -123,7 +105,7 @@ export class App extends Component {
 					onRequestChange={this.onDrawerRequestChange}
 					>
 					<div className={css.menuItem}>
-						<span style={totalConstStyle}>{formatNumber(14253155)}</span>
+						<span style={totalConstStyle}>{formatNumber(totalCostThisMonth)}</span>
 					</div>
 					<Divider />
 					<MenuItem
@@ -144,10 +126,12 @@ export class App extends Component {
 						leftIcon={<ActionSettings/>}
 						>Settings</MenuItem>
 					<Divider />
-					<MenuItem
-						onTouchTap={() => this.setActivePage(5)}
-						leftIcon={<HardwareSecurity/>}
-						>Admin</MenuItem>
+					{isAdmin ? (
+						<MenuItem
+							onTouchTap={() => this.setActivePage(5)}
+							leftIcon={<HardwareSecurity/>}
+							>Admin</MenuItem>
+					) : (null)}
 				</Drawer>
 				<div className={css.container}>
 					<ActivePage/>

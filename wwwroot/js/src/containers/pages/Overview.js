@@ -35,19 +35,19 @@ export class Overview extends Component {
 	}
 
 	render() {
-
+		const tabsStle = { background: '#303030', color: '#ffffff' };
 		return (
 			<div>
 				<Tabs
 					value={this.state.activeTab}
 					onChange={this.handleTabChange}
 					>
-					<Tab label="Ovewview" value='overview' >
+					<Tab label="Ovewview" value='overview' style={tabsStle}>
 						<div>
-							<h2 >Tab A</h2>
+
 						</div>
 					</Tab>
-					<Tab label="Filter" value='filter'>
+					<Tab label="Filter" value='filter' style={tabsStle}>
 						<div>
 							<h2 >Tab B</h2>
 						</div>

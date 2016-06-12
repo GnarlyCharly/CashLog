@@ -1,0 +1,18 @@
+.overlay{
+  position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.9);
+	z-index: 200;
+}
+
+.center{
+  position: absolute;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+	background-position: center;
+	background-repeat: no-repeat;
+}

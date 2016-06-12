@@ -1,13 +1,10 @@
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import configureStore from './utils/configureStore';
-import App from './containers/App';
 import DevTools from './utils/devTools.js';
+import Themer from './Themer';
 
 const store = configureStore();
 
@@ -23,9 +20,7 @@ export default class Root extends Component {
 		return (
 			<Provider store={store}>
 				<div>
-					<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-						<App/>
-					</MuiThemeProvider>
+					<Themer/>
 					{devTools}
 				</div>
 			</Provider>

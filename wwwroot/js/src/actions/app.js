@@ -25,11 +25,24 @@ export function action_app_getUserInfo(){
 	};
 }
 
+export function temp(val){
+	return (dispatch) => {
+
+		const tempInfo = {...tempUserInfo, totalCostThisMonth: val};
+
+		dispatch({
+			type: APP_RECIVED_USERINFO,
+			userInfo: tempInfo
+		});
+
+
+	};
+}
 
 const tempUserInfo = {
 	userName: 'Calle',
 	userID: 2,
 	isAdmin: true,
 	totalCostThisMonth: 1,
-	monthlyIncome: 100
+	monthlyIncome: 10
 };
