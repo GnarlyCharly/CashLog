@@ -12,6 +12,9 @@ import {
 	IconButton,
 	Divider
 } from 'material-ui';
+import {
+	lightBlue500
+} from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 
 import css from './App.css';
@@ -43,7 +46,7 @@ export class App extends Component {
 
 		this.state = {
 			drawerOpen: false,
-			activePageId: 1
+			activePageId: 2
 		};
 
 		this.openDrawer = ::this.openDrawer;
@@ -55,12 +58,13 @@ export class App extends Component {
 		this.setState({drawerOpen: true});
 	}
 
-	onDrawerRequestChange(open, reason){
-		if(reason === 'clickaway'){
-			this.setState({drawerOpen: false});
-		}else{
-			console.warn(open, reason);
-		}
+	onDrawerRequestChange(open){
+		// if(reason === 'clickaway'){
+		// 	this.setState({drawerOpen: false});
+		// }else if{
+		// 	alert(open + reason);
+		// }
+		this.setState({drawerOpen: open});
 	}
 
 	setActivePage(pageId){
@@ -87,6 +91,7 @@ export class App extends Component {
 
 		const totalConstStyle = { color: color.textColor };
 		const appBarStyle = { background: color.color };
+		const menuItemStyle = { color: lightBlue500 };
 
 		const ActivePage = this.getActivePage();
 
@@ -102,6 +107,7 @@ export class App extends Component {
 				<Drawer
 					open={this.state.drawerOpen}
 					docked={false}
+					swipeAreaWidth={60}
 					onRequestChange={this.onDrawerRequestChange}
 					>
 					<div className={css.menuItem}>
@@ -111,25 +117,30 @@ export class App extends Component {
 					<MenuItem
 						onTouchTap={() => this.setActivePage(1)}
 						leftIcon={<ActionInput/>}
+						style={menuItemStyle}
 						>Input</MenuItem>
 					<MenuItem
 						onTouchTap={() => this.setActivePage(2)}
 						leftIcon={<ActionTrendingUp/>}
+						style={menuItemStyle}
 						>Overview</MenuItem>
 					<MenuItem
 						onTouchTap={() => this.setActivePage(3)}
 						leftIcon={<AvLibraryBooks/>}
+						style={menuItemStyle}
 						>Logs</MenuItem>
 					<Divider />
 					<MenuItem
 						onTouchTap={() => this.setActivePage(4)}
 						leftIcon={<ActionSettings/>}
+						style={menuItemStyle}
 						>Settings</MenuItem>
 					<Divider />
 					{isAdmin ? (
 						<MenuItem
 							onTouchTap={() => this.setActivePage(5)}
 							leftIcon={<HardwareSecurity/>}
+							style={menuItemStyle}
 							>Admin</MenuItem>
 					) : (null)}
 				</Drawer>

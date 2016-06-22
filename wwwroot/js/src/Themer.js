@@ -8,7 +8,9 @@ import {
 	grey100,
 	grey400,
 	grey500,
-	fullWhite
+	fullWhite,
+	lightBlue500,
+	grey900
 } from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator';
 import { connect } from 'react-redux';
@@ -40,15 +42,15 @@ export class Themer extends Component {
 			spacing: spacing,
 			fontFamily: 'Roboto, sans-serif',
 			palette: {
-				primary1Color: cyan500,
-				primary2Color: cyan700,
+				primary1Color: lightBlue500,
+				primary2Color: lightBlue500,
 				primary3Color: grey400,
-				accent1Color: cyan500,
+				accent1Color: lightBlue500,
 				accent2Color: grey100,
 				accent3Color: grey500,
 				textColor: fullWhite,
 				alternateTextColor: '#303030',
-				canvasColor: '#303030',
+				canvasColor: grey900,
 				borderColor: fade(fullWhite, 0.3),
 				disabledColor: fade(fullWhite, 0.3),
 				pickerHeaderColor: fade(fullWhite, 0.12),

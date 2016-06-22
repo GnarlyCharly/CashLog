@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 
 import {
-	APP_RECIVED_USERINFO
+	APP_RECIVED_USERINFO,
+	APP_RECIVED_OVERVIEW_GROUPS
 } from '../constants/ActionTypes';
 
 export function userInfo(state = null, action){
@@ -11,9 +12,16 @@ export function userInfo(state = null, action){
 	return state;
 }
 
-const rootReducer = combineReducers({
+export function overviewGroups(state = null, action){
+	if(action.type === APP_RECIVED_OVERVIEW_GROUPS){
+		return action.overviewGroups;
+	}
+	return state;
+}
 
-	userInfo
+const rootReducer = combineReducers({
+	userInfo,
+	overviewGroups
 });
 
 export default rootReducer;
