@@ -1,0 +1,13 @@
+.container {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  right: 20px;
+}
+.row {
+  padding-top: 30px;
+}
+.item {
+  display: inline-block;
+  text-align: center;
+}

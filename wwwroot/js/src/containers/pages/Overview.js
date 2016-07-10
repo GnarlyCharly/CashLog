@@ -30,6 +30,8 @@ import {
 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 
+import FilterTab from '../FilterTab';
+import LoadingIndicator from '../../utils/LoadingIndicator';
 import { action_app_getOverviewGroups } from '../../actions/app';
 import { getColorForCost, formatNumber } from '../../utils/helper';
 
@@ -73,21 +75,12 @@ export class Overview extends Component {
 	constructor(props) {
 		super(props);
 
-		const date = new Date();
-		const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-		const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-
 		this.state = {
-			activeTab: 'overview',
-			fromDate: firstDay,
-			toDate: lastDay
+			activeTab: 'overview'
 		};
+
 		this.handleTabChange = :: this.handleTabChange;
 		this.handleInfoClick = :: this.handleInfoClick;
-	}
-
-	componentWillMount(){
-		this.props.dispatch(action_app_getOverviewGroups());
 	}
 
 	handleTabChange(value){
@@ -102,15 +95,7 @@ export class Overview extends Component {
 	}
 
 	render() {
-		const {
-			overviewGroups
-		} = this.props;
-		if(!overviewGroups){
-			return null;
-		}
-
 		const tabStyle = {background: grey900, color: lightBlue500};
-
 		return (
 			<div>
 				<Tabs
@@ -121,44 +106,9 @@ export class Overview extends Component {
 						{this.renderOverview()}
 					</Tab>
 					<Tab label="Filter" value='filter' style={tabStyle}>
-						{this.renderFilter()}
+						<FilterTab onFilterChange={() => this.setState({activeTab: 'overview'})}/>
 					</Tab>
 				</Tabs>
-			</div>
-		);
-	}
-
-	renderFilter(){
-		const {
-			fromDate,
-			toDate
-		} = this.state;
-		const textStyle = {
-			color: grey500,
-			fontSize: 18,
-			fontWeight: 'bold',
-			letterSpacing: 1.5
-		};
-		return (
-			<div style={{position: 'absolute', top: 10, left: 20, right: 20}}>
-				<div style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>
-					<DatePicker
-						hintText="From"
-						value={fromDate}
-						style={{width: 100, display: 'inline-block'}}
-						textFieldStyle={{width: 100}}
-						onChange={(e, date) => this.setState({fromDate: date})} />
-					<div style={textStyle}>From</div>
-				</div>
-				<div style={{display: 'inline-block', width: '50%', textAlign: 'center'}}>
-					<DatePicker
-						hintText="To"
-						value={toDate}
-						style={{width: 100, display: 'inline-block'}}
-						textFieldStyle={{width: 100}}
-						onChange={(e, date) => this.setState({toDate: date})}/>
-					<div style={textStyle}>To</div>
-				</div>
 			</div>
 		);
 	}
@@ -166,10 +116,18 @@ export class Overview extends Component {
 	renderOverview(){
 		const {
 			overviewGroups,
-			userInfo
+			userInfo,
+			dispatch
 		} = this.props;
-		console.warn(overviewGroups);
-		console.warn(userInfo);
+
+		if(!overviewGroups){
+			dispatch(action_app_getOverviewGroups());
+			return (
+				<div style={{position: 'relative', height: 200}}>
+					<LoadingIndicator overlay={false}/>
+				</div>
+			);
+		}
 
 		return (
 			<div style={{ background: '#303030' }}>

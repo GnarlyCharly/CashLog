@@ -10,7 +10,9 @@ import {
 	Drawer,
 	MenuItem,
 	IconButton,
-	Divider
+	Divider,
+	Dialog,
+	FlatButton
 } from 'material-ui';
 import {
 	lightBlue500
@@ -18,6 +20,7 @@ import {
 import { connect } from 'react-redux';
 
 import css from './App.css';
+import Logs from './pages/Logs';
 import Overview from './pages/Overview';
 import Todo from './pages/Todo';
 import { getColorForCost, formatNumber } from '../utils/helper';
@@ -25,7 +28,7 @@ import { getColorForCost, formatNumber } from '../utils/helper';
 const pages = {
 	1: Todo,
 	2: Overview,
-	3: Todo,
+	3: Logs,
 	4: Todo,
 	5: Todo
 };
@@ -46,12 +49,18 @@ export class App extends Component {
 
 		this.state = {
 			drawerOpen: false,
-			activePageId: 2
+			activePageId: 3,
+			logoutDialogOpen: false
 		};
 
 		this.openDrawer = ::this.openDrawer;
 		this.onDrawerRequestChange = ::this.onDrawerRequestChange;
 		this.getActivePage = ::this.getActivePage;
+		this.onLogout = :: this.onLogout;
+	}
+
+	onLogout(){
+		this.refs.form.submit();
 	}
 
 	openDrawer(){
@@ -59,11 +68,6 @@ export class App extends Component {
 	}
 
 	onDrawerRequestChange(open){
-		// if(reason === 'clickaway'){
-		// 	this.setState({drawerOpen: false});
-		// }else if{
-		// 	alert(open + reason);
-		// }
 		this.setState({drawerOpen: open});
 	}
 
@@ -101,7 +105,11 @@ export class App extends Component {
 					title={userName}
 					style={appBarStyle}
 					onLeftIconButtonTouchTap={this.openDrawer}
-					iconElementRight={<IconButton><ActionPowerSettingsNew/></IconButton>}
+					iconElementRight={
+						<IconButton onClick={() => this.setState({logoutDialogOpen: true})}>
+							<ActionPowerSettingsNew/>
+						</IconButton>
+					}
 					>
 				</AppBar>
 				<Drawer
@@ -147,6 +155,28 @@ export class App extends Component {
 				<div className={css.container}>
 					<ActivePage/>
 				</div>
+				<form ref={'form'} action='util/logout.php' method='post'/>
+				<Dialog
+					actions={[
+						<FlatButton
+							key={0}
+							label="Ok"
+							primary={true}
+							onTouchTap={() => this.refs.form.submit()}
+						/>,
+						<FlatButton
+							key={1}
+							label="Cancel"
+							secondary={true}
+							onTouchTap={() => this.setState({logoutDialogOpen: false})}
+						/>
+					]}
+					modal={false}
+					open={this.state.logoutDialogOpen}
+					onRequestClose={() => this.setState({logoutDialogOpen: false})}
+					>
+						Logout?
+				</Dialog>
 			</div>
 		);
 	}

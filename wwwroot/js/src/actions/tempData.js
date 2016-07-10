@@ -160,3 +160,87 @@ export const overviewGroups = [
 		]
 	}
 ];
+
+export const logsWihtDate = [
+	{
+		date: '2016-07-09',
+		day: 'Saturday'
+	},
+	{
+		id: 830,
+		userID: 1,
+		cost: 216,
+		comment: 'Coop',
+		date: '2016-07-09 17:36:22',
+		shared: false,
+		done: true,
+		tagID: 1,
+		tagName: 'Livsmedel',
+		groupId: 1,
+		groupName: 'Mat & Dryck'
+	},
+	{
+		date: '2016-07-07',
+		day: 'Thursday'
+	},
+	{
+		id: 823,
+		userID: 1,
+		cost: 119,
+		comment: 'Väzzo',
+		date: '2016-07-07 14:38:24',
+		shared: false,
+		done: true,
+		tagID: 2,
+		tagName: 'Restaurang',
+		groupId: 1,
+		groupName: 'Mat & Dryck'
+	},
+	{
+		date: '2016-07-06',
+		day: 'Wednesday'
+	},
+	{
+		id: 822,
+		userID: 1,
+		cost: 287,
+		comment: 'Golfdiskar',
+		date: '2016-07-06 22:03:13',
+		shared: false,
+		done: true,
+		tagID: 28,
+		tagName: 'Hobby',
+		groupId: 5,
+		groupName: 'Fritid'
+	},
+	{
+		date: '2016-07-03',
+		day: 'Sunday'
+	},
+	{
+		id: 815,
+		userID: 1,
+		cost: 66,
+		comment: 'Mcdonalds',
+		date: '2016-07-03 19:58:18',
+		shared: false,
+		done: true,
+		tagID: 2,
+		tagName: 'Restaurang',
+		groupId: 1,
+		groupName: 'Mat & Dryck'
+	},
+	{
+		id: 814,
+		userID: 1,
+		cost: 599,
+		comment: 'Golfskor - Sportamore',
+		date: '2016-07-03 19:57:47',
+		shared: false,
+		done: true,
+		tagID: 8,
+		tagName: 'Sport & Fritidsartiklar',
+		groupId: 2,
+		groupName: 'Shopping'
+	}
+];
