@@ -49,7 +49,7 @@ export class App extends Component {
 
 		this.state = {
 			drawerOpen: false,
-			activePageId: 3,
+			activePageId: 2,
 			logoutDialogOpen: false
 		};
 

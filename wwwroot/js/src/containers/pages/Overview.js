@@ -26,7 +26,9 @@ import {
 	blue500,
 	grey600,
 	lightBlue500,
-	grey500
+	grey500,
+	grey800,
+	grey700
 } from 'material-ui/styles/colors';
 import { connect } from 'react-redux';
 
@@ -140,7 +142,7 @@ export class Overview extends Component {
 							letterSpacing: 1.5
 						};
 						return (
-							<div key={g.groupId}>
+							<div key={g.groupId} style={{margin: '5px 10px 5px 10px', background: grey800}}>
 								<ListItem
 									primaryText={<div style={groupSumStyle}>{formatNumber(g.sum)}</div>}
 									secondaryText={<div style={{color: fullWhite}}>{formatNumber(g.groupName)}</div>}
@@ -150,41 +152,41 @@ export class Overview extends Component {
 									nestedItems={
 										g.tags.map(t => {
 											return (
-												<ListItem
-													key={t.tagId}
-													primaryText={<span style={groupSumStyle}>{formatNumber(t.sum)}</span>}
-													secondaryText={<div style={{color: fullWhite}}>{formatNumber(t.tagName)}</div>}
-													primaryTogglesNestedList={true}
-													leftAvatar={<Avatar icon={<ActionInput />} backgroundColor={getColorForCost(g.sum, (userInfo.monthlyIncome / 10)).color} />}
-													nestedListStyle={{ background: grey600 }}
-													nestedItems={
-														t.logs.map(l => {
-															return (
-																<div key={l.id} style={{margin: '7px 7px 7px 72px', background: '#303030', borderRadius: 5}}>
-																	<ListItem
-																		primaryText={
-																			<div>
-																				<span style={groupSumStyle}>{formatNumber(l.cost)}</span>
-																				<span style={{color: fullWhite, marginLeft: 10}}>{formatNumber(l.comment)}</span>
-																			</div>
-																		}
-																		rightIconButton={rightIconMenu}
-																		>
-																		{/*logChild*/}
-																	</ListItem>
+												<div key={t.tagId} style={{margin: '5px 0px 5px 0px', background: grey700}}>
+													<ListItem
+														primaryText={<span style={groupSumStyle}>{formatNumber(t.sum)}</span>}
+														secondaryText={<div style={{color: fullWhite}}>{formatNumber(t.tagName)}</div>}
+														primaryTogglesNestedList={true}
+														leftAvatar={<Avatar icon={<ActionInput />} backgroundColor={getColorForCost(g.sum, (userInfo.monthlyIncome / 10)).color} />}
+														nestedItems={
+															t.logs.map(l => {
+																return (
+																	<div key={l.id} style={{margin: '5px 10px 5px 10px', background: grey800}}>
+																		<ListItem
+																			primaryText={
+																				<div>
+																					<span style={groupSumStyle}>{formatNumber(l.cost)}</span>
+																					<span style={{color: fullWhite, marginLeft: 10}}>{formatNumber(l.comment)}</span>
+																				</div>
+																			}
+																			rightIconButton={rightIconMenu}
+																			>
+																			{/*logChild*/}
+																		</ListItem>
 
-																</div>
-															);
-														})
-													}>
-													{/*tagChild*/}
-												</ListItem>
+																	</div>
+																);
+															})
+														}>
+														{/*tagChild*/}
+													</ListItem>
+												</div>
 											);
 										})
 									}>
 									{/*groupChild*/}
 								</ListItem>
-								<Divider />
+
 							</div>
 						);
 					})}
