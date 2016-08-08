@@ -23,10 +23,11 @@ import css from './App.css';
 import Logs from './pages/Logs';
 import Overview from './pages/Overview';
 import Todo from './pages/Todo';
+import Input from './pages/Input';
 import { getColorForCost, formatNumber } from '../utils/helper';
 
 const pages = {
-	1: Todo,
+	1: Input,
 	2: Overview,
 	3: Logs,
 	4: Todo,
