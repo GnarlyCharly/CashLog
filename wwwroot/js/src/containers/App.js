@@ -20,10 +20,10 @@ import {
 import { connect } from 'react-redux';
 
 import css from './App.css';
+import Input from './pages/Input';
 import Logs from './pages/Logs';
 import Overview from './pages/Overview';
 import Todo from './pages/Todo';
-import Input from './pages/Input';
 import { getColorForCost, formatNumber } from '../utils/helper';
 
 const pages = {
@@ -50,7 +50,7 @@ export class App extends Component {
 
 		this.state = {
 			drawerOpen: false,
-			activePageId: 2,
+			activePageId: 1,
 			logoutDialogOpen: false
 		};
 

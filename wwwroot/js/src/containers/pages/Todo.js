@@ -5,8 +5,6 @@ import {
 } from 'material-ui';
 import { connect } from 'react-redux';
 
-import { temp } from '../../actions/app';
-
 export class Todo extends Component {
 	render() {
 

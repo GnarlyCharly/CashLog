@@ -1,4 +1,3 @@
-import ActionHome from 'material-ui/svg-icons/action/home';
 import ActionInput from 'material-ui/svg-icons/action/info-outline';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import React, { Component, PropTypes } from 'react';
@@ -133,7 +132,7 @@ export class Overview extends Component {
 							<div key={i} style={{margin: '5px 10px 5px 10px', background: grey800}}>
 								<ListItem
 									primaryText={log.cost}
-									leftAvatar={<Avatar icon={<ActionHome />} color={getColorForCost(log.cost, (userInfo.monthlyIncome / 10)).color} />}
+									leftAvatar={<Avatar backgroundColor={getColorForCost(log.cost, (userInfo.monthlyIncome / 10)).color} />}
 									rightIconButton={rightIconMenu}
 									secondaryText={
 										<p style={{color: '#fff'}}>

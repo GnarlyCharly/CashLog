@@ -1,0 +1,23 @@
+.rs-control .rs-range-color {
+    background-color: #03a9f4;
+}
+.rs-control .rs-path-color {
+    background-color: #03a9f4;
+}
+.rs-control .rs-handle {
+    background-color: #9E9E9E;
+}
+.rs-control .rs-bg-color {
+    background-color: #303030;
+}
+.rs-border {
+    border: 1px solid #303030;
+}
+
+.rs-handle-dot:after {
+    background-color: #03a9f4;
+}
+
+.rs-handle-dot {
+    border: 1px solid #03a9f4;
+}
